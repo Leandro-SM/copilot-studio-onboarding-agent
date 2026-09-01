@@ -10,13 +10,34 @@ Quando um novo usuário entra (novo colaborador, novo cliente, novo membro de co
 
 ## 🧩 Como funciona (visão geral)
 
+```mermaid
+flowchart LR
+    A[Novo usuário<br/>registrado] --> B{Camada de<br/>orquestração}
+    B -->|Agendado| C[Verificação<br/>periódica]
+    B -->|Evento| D[Disparo<br/>imediato]
+    C --> E[Agente<br/>Copilot Studio]
+    D --> E
+    E --> F[Sequência de<br/>onboarding]
+    F --> G[/Canal de entrega/]
+    G --> H([Teams])
+    G --> I([Site / Web])
+    G --> J([E-mail])
+    E -.consulta.-> K[(Fontes de<br/>conhecimento)]
 ```
-   Evento de entrada                 Orquestração                Agente Copilot Studio
-   (novo usuário)      ──────►   (gatilho / automação)   ──────►   (mensagens de onboarding)
-                                                                          │
-                                                                          ▼
-                                                                  Canal de entrega
-                                                              (Teams / Web / e-mail)
+
+### Sequência de mensagens
+
+```mermaid
+sequenceDiagram
+    participant U as Novo usuário
+    participant O as Orquestração
+    participant Ag as Agente Copilot Studio
+    O->>Ag: Aciona onboarding (idempotente)
+    Ag->>U: 1. Boas-vindas 👋
+    Ag->>U: 2. Primeiros passos / checklist
+    Ag->>U: 3. Recursos e FAQ
+    U->>Ag: Dúvida?
+    Ag->>U: Resposta (ou encaminha p/ suporte)
 ```
 
 No Copilot Studio você descreve com suas próprias palavras o que quer que o agente faça, e a IA gera nome, descrição, instruções e sugere gatilhos, canais, fontes de conhecimento e ferramentas.
@@ -29,6 +50,7 @@ No Copilot Studio você descreve com suas próprias palavras o que quer que o ag
 | [`docs/02-gatilhos-e-automacao.md`](docs/02-gatilhos-e-automacao.md) | Tipos de gatilho (agendado x evento) e boas práticas |
 | [`docs/03-mensagens-onboarding.md`](docs/03-mensagens-onboarding.md) | Estrutura e exemplos de sequência de mensagens |
 | [`docs/04-seguranca-e-privacidade.md`](docs/04-seguranca-e-privacidade.md) | Autenticação, segredos e dados sensíveis |
+| [`docs/05-publicacao-por-canal.md`](docs/05-publicacao-por-canal.md) | Como publicar o agente em Teams, site e demonstração |
 | [`templates/onboarding-sequence.example.json`](templates/onboarding-sequence.example.json) | Exemplo de configuração de sequência (fictício) |
 
 ## 🚀 Primeiros passos
@@ -37,7 +59,7 @@ No Copilot Studio você descreve com suas próprias palavras o que quer que o ag
 2. Defina a **mensagem introdutória** (boas-vindas) — veja [`docs/03-mensagens-onboarding.md`](docs/03-mensagens-onboarding.md).
 3. Configure o **gatilho** de disparo — veja [`docs/02-gatilhos-e-automacao.md`](docs/02-gatilhos-e-automacao.md).
 4. Conecte fontes de conhecimento (FAQ, guias públicos).
-5. Teste no chat de teste e **publique** em um canal.
+5. Teste no chat de teste e **publique** em um canal — veja [`docs/05-publicacao-por-canal.md`](docs/05-publicacao-por-canal.md).
 
 ## ⚠️ Escopo e isenção
 
