@@ -1,0 +1,51 @@
+{
+  "$comment": "Exemplo FICTÍCIO e GENÉRICO de configuração de sequência de onboarding. Não representa nenhuma organização real. Ajuste os campos conforme sua plataforma.",
+  "sequenceName": "onboarding-default",
+  "locale": "pt-BR",
+  "trigger": {
+    "type": "event",
+    "event": "new_user_registered",
+    "idempotencyKey": "userId",
+    "description": "Dispara quando um novo usuário genérico é registrado."
+  },
+  "channel": {
+    "type": "generic",
+    "note": "Substitua por seu canal real (ex.: chat web, mensagens, e-mail)."
+  },
+  "messages": [
+    {
+      "step": 1,
+      "id": "welcome",
+      "text": "Olá! 👋 Bem-vindo(a). Estou aqui para te ajudar nos primeiros passos.",
+      "delaySeconds": 0
+    },
+    {
+      "step": 2,
+      "id": "getting-started",
+      "text": "Vamos começar? Aqui está um checklist inicial para você se ambientar.",
+      "delaySeconds": 5
+    },
+    {
+      "step": 3,
+      "id": "resources",
+      "text": "Se precisar, temos guias e uma FAQ para tirar dúvidas comuns.",
+      "delaySeconds": 5
+    },
+    {
+      "step": 4,
+      "id": "support",
+      "text": "Precisa de ajuda humana? É só dizer 'falar com suporte' a qualquer momento.",
+      "delaySeconds": 5
+    }
+  ],
+  "suggestedPrompts": [
+    "Por onde começar?",
+    "Mostrar checklist inicial",
+    "Falar com o suporte"
+  ],
+  "policy": {
+    "noSecretsInPrompts": true,
+    "dataMinimization": true,
+    "leastPrivilegeTools": true
+  }
+}
